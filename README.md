@@ -1,4 +1,4 @@
-# Pplusplus
+# P-plus-plus
 A C++ header that enables many Python-like features in C++
 
 This was originally a header I created for fun during spring break.
