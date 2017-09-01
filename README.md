@@ -1,12 +1,7 @@
 # P-plus-plus
 A C++ header that enables many Python-like features in C++
 
-This was originally a header I created for fun during spring break.
-
-The key features are the print command, the list class, and the var class. The list class and var class allow many sudo typeless operations.
-
-
-
+I made this spring of 2017 durning my CS 121 class after my teacher recommended that I share it. I thought I would post it on github for others to access. It hasn't been changed from its original post and the google drive links still work.
 
 
 # Here is the original classroom post:
