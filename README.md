@@ -48,7 +48,7 @@ print hello_str * 3;
 There’s a lot of other functionality I built in. I thought some of you guys might be interested in it. So here’s the header file and a demo program to go with it.
  
  
-If you want to play with the header, you’ve actually already got access to it. Just add the below line to your program, run it inside of build.tamu.edu , and it should work. ( Note: when you compile it, it’s going to give you a whole bunch of warnings, but you can ignore them)
+If you want to play with the header, you’ve actually already got access to it. Just add the below line to your program, run it inside of build.tamu.edu, and it should work. ( Note: when you compile it, it’s going to give you a whole bunch of warnings, but you can ignore them)
 ```C++
 #include "/home/ugrads/j/jeff.hykin/Python/Python.h"
 ```
@@ -68,4 +68,4 @@ cat /home/ugrads/j/jeff.hykin/Python/Python.h
 ```
  
  
-Let me know if you guys hit any bugs or have any questions;
+Let me know if you guys hit any bugs or have any questions
