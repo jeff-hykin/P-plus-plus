@@ -10,10 +10,11 @@ Just for fun over spring break I made a header file (Python.h) It allows some co
  
  
 for example: (all of the below code works inside C++)
-// strings and numbers can be stored in the same List 
-// and you can have lists of lists 
+
 
 ```C++
+// strings and numbers can be stored in the same List 
+// and you can have lists of lists 
 List a_list = { 10 , 20 , 30 };
 a_list.append("string");
 a_list.append(a_list);    // a list can even append itself 
