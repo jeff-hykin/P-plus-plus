@@ -1128,27 +1128,127 @@
 // print 
 //
 //////////////////////////////
+
         // I made this code based on code from the site below
+        // I like to think I made it more useful, but all originalality 
+        // goes to the original author
         // http://wiki.c2.com/?OverloadingCommaOperator
-        #define print cout,
+        
+        // to print
+        #define print __PrintOutputFixerStream.reset();__PrintOutputFixerStream,
+        class __PrintOutputFixerStreamClass : public stringstream
+            {
+                protected:
+                    // data 
+                        int length_of_last_line = 0;
+                        bool dont_go_up_a_line = true;
+                        string what_was_just_output = "";
+                        string content = "";
+                    // class helper functions
+                        void go_up_a_line()
+                            {
+                                cout << "\033[1A";
+                            }
+                        void go_to_the_right(int number_of_spaces)
+                            {
+                                cout << "\033["+to_string(number_of_spaces)+"C";
+                            }
+                        void save_cursor_position()
+                            {
+                                cout << "\033[s";
+                            }
+                        void restore_cursor_position()
+                            {
+                                cout << "\033[u";
+                            }
+                        int length_of_previous_line()
+                            {
+                                int charaters_till_newline = 0;
+                                Loop_ what_was_just_output.size() _Times
+                                    if (what_was_just_output[what_was_just_output.size() - LoopNumber] != '\n')
+                                        {
+                                            charaters_till_newline++;
+                                        }
+                                    else 
+                                        {
+                                            break;
+                                        }
+                                EndLoop__Times
+                                return charaters_till_newline;
+                            }
+                public:
+                    void reset()
+                        {
+                            length_of_last_line = 0;
+                            dont_go_up_a_line = true;
+                            what_was_just_output = "";
+                        }
+                    void output_line()
+                        {
+                            if (dont_go_up_a_line)
+                                {
+                                    save_cursor_position();
+                                    cout << content << "\n";
+                                    dont_go_up_a_line = false;
+                                }
+                            else
+                                {
+                                    go_up_a_line();
+                                    length_of_last_line += length_of_previous_line();
+                                    go_to_the_right(length_of_last_line);
+                                    cout << content; // dont output a newline
+                                    // FIXME, if the terminal width is really small 
+                                    // and the string is really long, this might mess things up 
+                                }
+                            restore_cursor_position();
+                        }
+                    void add_content(string input_)
+                        {
+                            what_was_just_output = content;
+                            content = input_;
+                        }
+            };
+        __PrintOutputFixerStream __PrintOutputFixerStream;
         template<class ANYTYPE>
         // for normal input (classes)
         inline ostream& operator,(ostream& o, const ANYTYPE& value) 
             {
-                o << VisualFormat(value);
-                // if using cout, then include a newline
-                    if (&o == &cout)
-                        {
-                            cout << "\n";
-                        }
+                // if its from print, then use the __PrintOutputFixerStream to add a newline
+                if (&o == &__PrintOutputFixerStream)
+                    {
+                        // erase the string-stream part of __PrintOutputFixerStream
+                        __PrintOutputFixerStream.str("");
+                        // add the line to __PrintOutputFixerStream
+                        __PrintOutputFixerStream.add_content(VisualFormat(value));
+                        // output the line 
+                        __PrintOutputFixerStream.output_line();
+                    }
+                // if it's some other stream
+                else
+                    {
+                        // then just keep going like normal
+                        o << VisualFormat(value);
+                    }
                 return o;
             }
         // for stream operators (fixed, setprecision(), etc)
         inline ostream& operator,(ostream& o, ostream& (*manip_fun)(ostream&)) 
             {
-                o << manip_fun;
+                // if its from print, then use then send it to cout directly 
+                if (&o == &__PrintOutputFixerStream)
+                    {
+                        cout << manip_fun;
+                    }
+                // if it's some other stream
+                else
+                    {
+                        // then just keep going like normal
+                        o << manip_fun;
+                    }
                 return o;
-            }    
+            }
+
+
 
 
 
