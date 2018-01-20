@@ -21,7 +21,7 @@ a_list.append(a_list);    // a list can even append itself
 
  
 print "print works a lot like print in python 2.7\n", 
-      "you can even use commas instead of << \n" ;
+      "you can even use commas instead of <<" ;
  
  
 For(each)in(a_list)
