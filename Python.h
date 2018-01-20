@@ -1136,6 +1136,11 @@
         inline ostream& operator,(ostream& o, const ANYTYPE& value) 
             {
                 o << VisualFormat(value);
+                // if using cout, then include a newline
+                    if (&o == &cout)
+                        {
+                            cout << "\n";
+                        }
                 return o;
             }
         // for stream operators (fixed, setprecision(), etc)
