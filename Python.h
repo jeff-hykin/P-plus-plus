@@ -1208,7 +1208,7 @@
                             content = input_;
                         }
             };
-        __PrintOutputFixerStream __PrintOutputFixerStream;
+        __PrintOutputFixerStreamClass __PrintOutputFixerStream;
         template<class ANYTYPE>
         // for normal input (classes)
         inline ostream& operator,(ostream& o, const ANYTYPE& value) 
